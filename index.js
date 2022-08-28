@@ -1,24 +1,47 @@
 const http = require('http');
-const url = require('url');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
-  /* 
-  const address_url = `http://localhost:5000/contact?name=anwar&country=bangladesh`;
-  const parsed_url = url.parse(address_url, true);
-  console.log(parsed_url);
-  const queryObject = parsed_url.host;
-  console.log(queryObject); 
-  */
+  if (req.url == '/') {
+    /* fs.readFile('data.txt', (err, data) => {
+      if (err) {
+        res.write('Fail');
+        res.end();
+      } else {
+        res.write(data);
+        res.end();
+      }
+    });
+    */
+    /* 
+    const data = fs.readFileSync('data.txt');
+    res.write(data);
+    res.end();
+     */
+    /* 
+    fs.writeFile('data.txt', 'Hello world...', (err) => {
+      if (err) {
+        res.write('Fail');
+        res.end();
+      } else {
+        res.write('Successful');
+        res.end();
+      }
+    }); 
+    */
 
-  const address_url = `http://localhost:5000/contact?name=anwar&country=bangladesh`;
-
-  const parsed_url = url.parse(address_url, true);
-  console.log(parsed_url);
-  const queryObject = parsed_url.protocol;
-  console.log(queryObject);
+    fs.writeFile('newData.txt', 'Hi, I am new in your File system', (err) => {
+      if (err) {
+        res.write('Fail New file');
+        res.end();
+      } else {
+        res.write('success New File');
+        res.end();
+      }
+    });
+  }
 });
 
-// console.log(url);
 const PORT = 5000;
 server.listen(PORT);
-console.log(`Server is listen a ${PORT}`);
+console.log(`Server is listen at ${PORT}`);
